@@ -86,16 +86,14 @@ export default class TicketService {
       if (request.getTicketType() == 'ADULT') {
         adults += request.getNoOfTickets()
         totalPrice += this.#calculatePrice(this.#adultPrice, adults)
-      }
-
-      if (request.getTicketType() == 'CHILD') {
+      } else if (request.getTicketType() == 'CHILD') {
         children += request.getNoOfTickets()
         totalPrice += this.#calculatePrice(this.#childPrice, children)
-      }
-
-      if (request.getTicketType() == 'INFANT') {
+      } else if (request.getTicketType() == 'INFANT') {
         infants += request.getNoOfTickets()
         totalPrice += this.#calculatePrice(this.#infantPrice, infants)
+      } else {
+        throw new InvalidPurchaseException('Wrong ticket type')
       }
     })
 
